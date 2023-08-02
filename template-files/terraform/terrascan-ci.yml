@@ -1,0 +1,56 @@
+name: Terrascan
+
+on:
+  # Scan changed files in PRs:
+  pull_request: {}
+  # Scan pushes to mainline branches and report all findings:
+  push:
+    branches: ["master", "main"]
+
+jobs:
+  terrascan_job:
+    runs-on: ubuntu-22.04
+    name: terrascan-action
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Install Terrascan
+      id: install-terrascan
+      # we are version-pinned to v1.18.0
+      run: |
+        curl -L "$(curl -s https://api.github.com/repos/tenable/terrascan/releases/91462438 | grep -o -E "https://.+?_Linux_x86_64.tar.gz")" > terrascan.tar.gz
+        tar -xf terrascan.tar.gz terrascan && rm terrascan.tar.gz
+        install terrascan /usr/local/bin && rm terrascan
+    - name: Run Terrascan
+      id: run-terrascan
+      # Terrascan outputs a failure (code 4) on scan errors even when the scan was successful due to rules. For now, ignore this with || true
+      run: |
+        terrascan scan . --output json | tee results.json || true
+    - name: Install logging prerequisites into container
+      shell: bash {0}
+      run: |
+        sudo apt-get -y install jq curl
+    - name: Generate logger template
+      shell: bash {0} # don't fail the job if the logging fails
+      run: |
+        jq -n --arg organization $GITHUB_REPOSITORY_OWNER \
+        -n --arg time $( date +'%Y-%m-%dT%H:%M:%SZ'  ) \
+        -n --arg action $GITHUB_WORKFLOW \
+        -n --arg repository $GITHUB_REPOSITORY \
+        -n --arg sha $GITHUB_SHA \
+        -n --arg branch $GITHUB_HEAD_REF \
+        -n --arg link "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" \
+        -f .github/workflows/output-template.json > tmp-output.json
+    - name: Format results appropriately from results.json
+      shell: bash {0} # don't fail the job if the logging fails
+      run: |
+        jq 'if .results.violations and (.results.violations != null) then .results.violations |  map({"path": .file, "message": .description, "line": .line}) else [] end' results.json > tmp.json
+        jq --argjson scanResults "$(<tmp.json)" '.results += $scanResults' tmp-output.json >  output.json
+    - name: Send unified results to logging cluster
+      shell: bash {0} # don't fail the job if the logging fails
+      run: |
+        curl -X POST \
+        -H "Content-Type: application/json" \
+        -H "Authorization: Bearer ${{ secrets.N8N_PRODSEC_ACTIONS_TOKEN }}" \
+        -d @./output.json \
+        ${{ secrets.N8N_PRODSEC_ACTIONS_ENDPOINT }}
