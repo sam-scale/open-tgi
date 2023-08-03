@@ -10,8 +10,8 @@ members = [
 [workspace.package]
 version = "0.9.4"
 edition = "2021"
-authors = ["Olivier Dehaene"]
-homepage = "https://github.com/huggingface/text-generation-inference"
+authors = ["Yunfeng Bai"]
+homepage = "https://github.com/scaleapi/open-tgi"
 
 [profile.release]
 debug = 1

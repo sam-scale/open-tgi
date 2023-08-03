@@ -1,13 +1,13 @@
 [tool.poetry]
 name = "text-generation"
 version = "0.6.0"
-description = "Hugging Face Text Generation Python Client"
+description = "OpenTGI Generation Python Client"
 license = "Apache-2.0"
 authors = ["Olivier Dehaene <olivier@huggingface.co>"]
-maintainers = ["Olivier Dehaene <olivier@huggingface.co>"]
+maintainers = ["Yunfeng Bai <yunfeng.bai@scale.com>"]
 readme = "README.md"
-homepage = "https://github.com/huggingface/text-generation-inference"
-repository = "https://github.com/huggingface/text-generation-inference"
+homepage = "https://github.com/scaleapi/open-tgi"
+repository = "https://github.com/scaleapi/open-tgi"
 
 
 [tool.poetry.dependencies]

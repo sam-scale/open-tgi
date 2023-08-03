@@ -3,11 +3,15 @@
 <!--
 Congratulations! You've made it this far! You're not quite done yet though.
 
-Once merged, your PR is going to appear in the release notes with the title you set, so make sure it's a great title that fully reflects the extent of your awesome contribution.
+Once merged, your PR is going to appear in the release notes with the title you set, so make sure it's a great title 
+that fully reflects the extent of your awesome contribution.
 
-Then, please replace this with a description of the change and which issue is fixed (if applicable). Please also include relevant motivation and context. List any dependencies (if any) that are required for this change.
+Then, please replace this with a description of the change and which issue is fixed (if applicable). 
+Please also include relevant motivation and context. List any dependencies (if any) that are required for this change.
 
-Once you're done, someone will review your PR shortly (see the section "Who can review?" below to tag some potential reviewers). They may suggest changes to make the code even better. If no one reviewed your PR after a week has passed, don't hesitate to post a new comment @-mentioning the same persons---sometimes notifications get lost.
+Once you're done, someone will review your PR shortly (see the section "Who can review?" below to tag some potential 
+reviewers). They may suggest changes to make the code even better. If no one reviewed your PR after a week has passed, 
+don't hesitate to post a new comment @-mentioning the same persons---sometimes notifications get lost.
 -->
 
 <!-- Remove if not applicable -->
@@ -31,10 +35,3 @@ Fixes # (issue)
 
 Anyone in the community is free to review the PR once the tests have passed. Feel free to tag
 members/contributors who may be interested in your PR.
-
-<!-- Your PR will be replied to more quickly if you can figure out the right person to tag with @
-
-
-@OlivierDehaene OR @Narsil
-
- -->
