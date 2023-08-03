@@ -1,4 +1,23 @@
-# Copy of huggingface's text-generation-inference repo
+# OpenTGI
+
+OpenTGI is Scale's fork of `text-generation-inference`, originally developed by Hugging Face. This fork was created 
+in response to the license for `text-generation-inference` changing from Apache 2.0 to HFOIL 1.0, which has some 
+commercial restrictions.
+
+OpenTGI is a core dependency of [LLM Engine](https://github.com/scaleapi/llm-engine), which is Scale's open source 
+framework for serving and fine-tuning open source LLMs on your own infrastructure.
+
+We are committed to keeping OpenTGI open source without commercial restrictions, and look forward to engaging with 
+the community in building a flexible and high-performance open source LLM inference framework!
+
+## What's next
+
+[] CI pipeline
+[] Investigate PagedAttention
+[] Investigating multi-query attention
+[] Continued feature integration with LLM Engine
+
+
 # ORIGINAL CONTENT FROM DOWN BELOW
 
 <div align="center">
